@@ -8,6 +8,7 @@
 package com.acme.apis;
 
 import com.acme.apis.models.Contact;
+import com.ibm.mfp.adapter.api.OAuthSecurity;
 import io.swagger.annotations.*;
 
 import java.util.*;
@@ -43,6 +44,7 @@ public class ContactListApiResource {
     @ApiOperation(value = "Returns A list of all the contacts")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @OAuthSecurity(enabled = false)
     public Collection<Contact> getAllContacts() {
         return contactMap.values();
     }
@@ -58,7 +60,7 @@ public class ContactListApiResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addContact(Contact contact, @Context UriInfo uriInfo) {
         if (contactMap.containsKey(contact.name)) {
-            return Response.status(409).entity("Contact named: " + contact.name + " already exist").build();
+            return Response.status(401).entity("Contact named: " + contact.name + " already exist").build();
         }
 
         contactMap.put(contact.name, contact);
