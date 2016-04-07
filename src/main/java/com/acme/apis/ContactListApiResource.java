@@ -58,7 +58,7 @@ public class ContactListApiResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addContact(Contact contact, @Context UriInfo uriInfo) {
         if (contactMap.containsKey(contact.name)) {
-            return Response.status(409).entity("Contact named: " + contact.name + " already exist").build();
+            return Response.status(402).entity("Contact named: " + contact.name + " already exist").build();
         }
 
         contactMap.put(contact.name, contact);
