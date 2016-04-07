@@ -44,7 +44,6 @@ public class ContactListApiResource {
     @ApiOperation(value = "Returns A list of all the contacts")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @OAuthSecurity(enabled = false)
     public Collection<Contact> getAllContacts() {
         return contactMap.values();
     }
