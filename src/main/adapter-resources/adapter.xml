@@ -14,4 +14,7 @@
 	<description>contactListApi</description>
 
 	<JAXRSApplicationClass>com.acme.apis.ContactListApiApplication</JAXRSApplicationClass>
+
+	<property name="db" defaultValue="db1" type="string" displayName="Contacts DB Name" description="The name of the contacts DB"/>
+
 </mfp:adapter>
