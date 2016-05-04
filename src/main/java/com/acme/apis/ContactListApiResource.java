@@ -8,24 +8,11 @@
 package com.acme.apis;
 
 import com.acme.apis.models.Contact;
-import com.ibm.mfp.adapter.api.OAuthSecurity;
 import io.swagger.annotations.*;
-
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.*;
 import java.util.logging.Logger;
-
-import javax.servlet.AsyncContext;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
-import javax.ws.rs.container.AsyncResponse;
-import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.*;
-
 import com.ibm.mfp.adapter.api.ConfigurationAPI;
 
 @Api(value = "Contact list adapter")
@@ -124,52 +111,5 @@ public class ContactListApiResource {
         }
         return Response.ok().build();
     }
-
-
-    @Path("/resource")
-    @GET
-    @OAuthSecurity(enabled = false)
-    public void asyncGet(@Suspended final AsyncResponse asyncResponse, final @Context AsyncContext ctx) {
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                    asyncResponse.resume("hallo2!\n");
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-
-        }).start();
-    }
-
-
-    @Path("/resource2")
-    @GET
-    @OAuthSecurity(enabled = false)
-    public void asyncGet2(final @Context HttpServletRequest request, final @Context HttpServletResponse response) {
-
-        final AsyncContext ctx = request.startAsync(request, response);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(3000);
-                    ServletOutputStream os = ctx.getResponse().getOutputStream();
-                    os.println("Done");
-                    os.flush();
-                    os.close();
-                    ctx.getClass().getMethod("reset").invoke(ctx);
-                } catch (Exception e) {
-                    ctx.complete();
-                    throw new RuntimeException(e);
-                }
-            }
-
-        }).start();
-    }
-
 
 }
