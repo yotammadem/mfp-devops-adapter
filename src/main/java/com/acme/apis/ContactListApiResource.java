@@ -73,11 +73,11 @@ public class ContactListApiResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateContact(Contact contact) {
-        if (contactMap.containsKey(contact.name)) {
-            contactMap.put(contact.name, contact);
-        } else {
-            throw new NotFoundException(contact.name);
-        }
+//        if (contactMap.containsKey(contact.name)) {
+//            contactMap.put(contact.name, contact);
+//        } else {
+//            throw new NotFoundException(contact.name);
+//        }
         return Response.ok().build();
     }
 
