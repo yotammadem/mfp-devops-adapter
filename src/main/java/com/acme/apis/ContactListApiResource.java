@@ -73,15 +73,15 @@ public class ContactListApiResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateContact(Contact contact) {
-//        if (contactMap.containsKey(contact.name)) {
-//            contactMap.put(contact.name, contact);
-//        } else {
-//            throw new NotFoundException(contact.name);
-//        }
+        if (contactMap.containsKey(contact.name)) {
+            contactMap.put(contact.name, contact);
+        } else {
+            throw new NotFoundException(contact.name);
+        }
         return Response.ok().build();
     }
 
-    @ApiOperation(value = "Get contact")
+    @ApiOperation(value = "Get contact")ix
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = Contact.class),
             @ApiResponse(code = 404, message = "Contact not found")
