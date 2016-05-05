@@ -81,7 +81,7 @@ public class ContactListApiResource {
         return Response.ok().build();
     }
 
-    @ApiOperation(value = "Get contact")ix
+    @ApiOperation(value = "Get contact")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = Contact.class),
             @ApiResponse(code = 404, message = "Contact not found")
